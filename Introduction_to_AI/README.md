@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 ### 2. Create `.env` file
 
-Create a `.env` file in the project root directory (`c:\Users\huber\Documents\CyberAI\.env`):
+Create a `.env` file in the project root directory (`your_project_root\.env`):
 
 ```
 ANTHROPIC_API_KEY=sk-ant-your-key-here
