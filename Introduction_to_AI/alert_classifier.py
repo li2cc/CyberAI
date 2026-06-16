@@ -30,7 +30,7 @@ def classify_with_openai(alert: str) -> str:
     client = OpenAI(api_key=OPENAI_API_KEY)
 
     response = client.chat.completions.create(
-        model="gpt-4-mini",
+        model="gpt-5-mini",
         messages=[{
             "role": "user",
             "content": f"Classify benign/suspicious and explain in one sentence: {alert}"

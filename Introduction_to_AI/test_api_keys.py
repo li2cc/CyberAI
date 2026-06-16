@@ -29,7 +29,7 @@ print("Testing OpenAI API...")
 try:
     client = OpenAI(api_key=OPENAI_API_KEY)
     response = client.chat.completions.create(
-        model="gpt-4-mini",
+        model="gpt-4.1-2025-04-14",
         max_tokens=50,
         messages=[{"role": "user", "content": "Say 'OpenAI works!' in one sentence."}]
     )
