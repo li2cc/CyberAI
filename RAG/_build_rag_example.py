@@ -39,17 +39,18 @@ md(
     "**Audience:** Graduate students who have completed the `embedding.ipynb` notebook.\n\n"
     "**Goal:** Take the concepts (embeddings, chunking, retrieval, re-ranking) and assemble "
     "them into a complete, working RAG pipeline that answers questions from documents.\n\n"
-    "We follow the classic **six-step RAG recipe**:\n"
+    "We follow the classic **six-step RAG recipe**, then add a step that proves RAG's value:\n"
     "1. \U0001F4C4 Load & chunk the data\n"
     "2. \U0001F5C4️ Connect to a vector store\n"
     "3. \U0001F4E5 Ingest (embed + index) the chunks\n"
     "4. \U0001F50D Retrieve relevant context for a query\n"
     "5. \U0001F517 Build the RAG prompt / chain\n"
     "6. \U0001F4AC Ask questions with RAG\n\n"
-    "> **Reproducibility note:** This notebook runs **offline** with `sentence-transformers` "
-    "and `faiss` so it works in class without any server or API key. Each step also shows the "
-    "**production equivalent** (LangChain + a managed vector database like Milvus) in comments, "
-    "so you can map the teaching code onto a real-world stack."
+    "7. \U0001F52C Compare RAG vs. a pure LLM (OpenAI) and score the answers\n\n"
+    "> **Reproducibility note:** Steps 1-6 run **offline** with `sentence-transformers` and "
+    "`faiss` so they work in class without any server or API key, and each shows the "
+    "**production equivalent** (LangChain + a managed vector database like Milvus) in comments. "
+    "**Step 7 calls the OpenAI API**, so it needs the `OPENAI_API_KEY` environment variable set."
 )
 
 md("## \U0001F6E0️ Setup")
@@ -313,6 +314,107 @@ _ = rag_answer("What are the phases of incident response?")
 
 print("\n--- Out-of-domain query ---")
 _ = rag_answer("What is the capital of France?")'''
+)
+
+# ---- Step 7 -----------------------------------------------------------------
+slide("\U0001F52C Step 7 — RAG vs. Pure LLM: Score & Compare", [
+    "Ask **OpenAI** the same question two ways",
+    "Pure LLM = model's own knowledge (no context)",
+    "RAG = same model, grounded in our knowledge base",
+    "An **LLM judge** scores each answer 0–10",
+    "Show the winner, labeled with where it came from",
+])
+script(
+    "How do we know RAG actually helps? We test it. For each question we ask the same OpenAI "
+    "model twice: once with no context (a pure LLM) and once with our retrieved context (RAG). "
+    "Then we use a second model call as an impartial *judge* to score each answer from 0 to 10 "
+    "for correctness and helpfulness, and we display the higher-scoring answer prefixed with its "
+    "source. The result depends entirely on coverage. When the question is about our domain — "
+    "cybersecurity incident response — RAG supplies precise, grounded facts and wins. When the "
+    "question is off-topic, our knowledge base has nothing useful, RAG correctly declines, and "
+    "the pure LLM's general knowledge wins. This is exactly the evaluation mindset you need: RAG "
+    "is not always better, it is better *when your data is relevant*."
+)
+code(
+    r'''import os
+from openai import OpenAI
+
+OPENAI_MODEL = "gpt-4o-mini"   # change to a model enabled on your account
+
+# Reads the key from the OPENAI_API_KEY environment variable.
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+print("OpenAI client ready. Model:", OPENAI_MODEL)'''
+)
+code(
+    r'''import re
+
+
+def ask_openai(system, user):
+    """Single OpenAI chat call -> answer text."""
+    resp = client.chat.completions.create(
+        model=OPENAI_MODEL,
+        temperature=0,
+        messages=[{"role": "system", "content": system},
+                  {"role": "user", "content": user}],
+    )
+    return resp.choices[0].message.content.strip()
+
+
+def ask_plain(query):
+    """Pure LLM: answer from the model's own knowledge, no retrieval."""
+    system = "You are a helpful expert. Answer the question concisely from your own knowledge."
+    return ask_openai(system, query)
+
+
+def ask_rag(query, score_threshold=0.35):
+    """RAG: same model, but answer ONLY from the retrieved context."""
+    context = get_context(query, score_threshold=score_threshold)
+    system = (
+        "You are a cybersecurity Q&A expert. Answer the question using ONLY the context below. "
+        "If the context does not contain the answer, reply exactly: "
+        "'I cannot answer this from the provided documents.'\n\n# Context\n" + context
+    )
+    return ask_openai(system, query)
+
+
+def judge(query, answer):
+    """LLM-as-judge: rate an answer 0-10 for correctness + helpfulness."""
+    system = ("You are a strict evaluator. Given a QUESTION and an ANSWER, rate the ANSWER's "
+              "correctness and helpfulness from 0 to 10. Respond with ONLY an integer.")
+    raw = ask_openai(system, f"QUESTION: {query}\nANSWER: {answer}")
+    m = re.search(r"\d+", raw)
+    return int(m.group()) if m else 0
+
+
+print("Helpers defined: ask_plain, ask_rag, judge")'''
+)
+code(
+    r'''def compare(query, score_threshold=0.35):
+    """Answer a query with both methods, score each, and show the winner."""
+    plain_ans = ask_plain(query)
+    rag_ans = ask_rag(query, score_threshold=score_threshold)
+    s_plain = judge(query, plain_ans)
+    s_rag = judge(query, rag_ans)
+
+    # Pick the higher-scoring answer (ties go to RAG, since it is grounded/citable).
+    if s_rag >= s_plain:
+        source, best = "RAG  (grounded in the knowledge base)", rag_ans
+    else:
+        source, best = "OpenAI API  (pure LLM, no context)", plain_ans
+
+    print("=" * 72)
+    print(f"BEST ANSWER FROM -> {source}")          # where the higher response came from
+    print(f"Scores  ->  RAG: {s_rag}/10   |   Pure LLM: {s_plain}/10")
+    print("=" * 72)
+    print("Q:", query)
+    print("\nBEST ANSWER:\n" + best + "\n")
+
+
+# Query 1 — IN-DOMAIN: the knowledge base covers this, so RAG should win.
+compare("What are the four phases of incident response in the NIST framework?")
+
+# Query 2 — OUT-OF-DOMAIN: not in our KB, so the pure LLM should win.
+compare("Who developed the theory of general relativity, and in what year was it published?")'''
 )
 
 # ---- Summary ----------------------------------------------------------------
