@@ -1,0 +1,9 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+torch
+# Optional — the gradient-boosting notebook uses scikit-learn's
+# HistGradientBoostingClassifier by default; install xgboost to run the
+# commented XGBoost equivalent:
+# xgboost

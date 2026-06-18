@@ -10,8 +10,26 @@ It consolidates what were previously four separate modules (ML Foundations, Appl
 ML, and Deep Learning) plus the capstone block into one continuous arc, and it is the home of the
 course's final project, **Project 4 — AI-Assisted ML Capstone**.
 
-> This folder is the module's working area. Add your notebooks, datasets (or dataset download
-> scripts), and reports here as you progress through the subtopics below.
+## Starter notebooks
+
+Four hands-on starter notebooks, one per subtopic, in the same format as the rest of the course —
+each topic is a **slide**, an **instructor script**, and a **runnable code** cell. They all run
+**fully offline** on a small synthetic "connection events" dataset generated in-notebook (no API
+key, no downloads), so you can run them in class and then swap in a real Kaggle dataset for
+Project 4.
+
+- **[01_ml_foundations.ipynb](01_ml_foundations.ipynb)** — load, inspect, clean, engineer features,
+  visualize, split, and the cardinal sin of **data leakage**.
+- **[02_applied_ml_detection.ipynb](02_applied_ml_detection.ipynb)** — baseline classifiers and the
+  metrics that matter in a SOC (confusion matrix, precision/recall/F1, ROC-AUC, threshold tuning).
+- **[03_advanced_ml_analytics.ipynb](03_advanced_ml_analytics.ipynb)** — random forest, gradient
+  boosting, feature importance, class-imbalance handling, clustering, and anomaly detection.
+- **[04_deep_learning.ipynb](04_deep_learning.ipynb)** — a small **PyTorch** network, the training
+  loop, and an honest benchmark against a classical baseline.
+
+Like the other modules, the notebooks are **generated from `_build_*.py` scripts**. To change a
+lecture, edit the build script and re-run it (`python _build_01_ml_foundations.py`), then re-execute
+to refresh outputs (`jupyter nbconvert --to notebook --execute --inplace 01_ml_foundations.ipynb`).
 
 ---
 
@@ -95,14 +113,15 @@ cybersecurity dataset and high-ranking results**, with help from AI tools.
 
 ## Setup
 
-This module uses the standard scientific-Python stack. From the repository root:
-
 ```bash
-pip install pandas numpy scikit-learn matplotlib seaborn xgboost torch jupyter kagglehub
+pip install -r requirements.txt
 ```
 
-Run notebooks in Jupyter, VS Code, or Google Colab (Colab is convenient for GPU when training
-deep-learning models). Keep any API keys in the repository-root `.env` — never commit secrets.
+Then open any notebook in Jupyter, VS Code, or Google Colab and run the cells top to bottom (Colab
+is convenient for a GPU when training the deep-learning notebook, though it runs fine on CPU). The
+four starter notebooks need no API key. For **Project 4**, `pip install kagglehub` (or use the
+Kaggle CLI) to pull your chosen dataset, and keep any keys in the repository-root `.env` — never
+commit secrets.
 
 ## Ethics & scope
 
