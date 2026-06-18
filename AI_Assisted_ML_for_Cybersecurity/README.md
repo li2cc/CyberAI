@@ -80,10 +80,10 @@ Turning the work above into a complete, defensible project.
 
 ---
 
-## Project 4 — AI-Assisted ML Capstone
+## Project 4 — AI-Assisted Prediction Models for Cybersecurity Datasets
 
-An individual, end-to-end ML project that produces **comprehensive analysis on an up-to-date
-cybersecurity dataset and high-ranking results**, with help from AI tools.
+An individual, end-to-end ML project that uses AI to **create prediction models on an up-to-date
+cybersecurity dataset and achieve high-ranking results**, with help from AI tools.
 
 - **Pick a current dataset** from [kaggle.com](https://www.kaggle.com/datasets) (or another
   instructor-approved source such as UCI, NSL-KDD, CIC-IDS2017, or Loghub). Prefer recent,

@@ -80,14 +80,16 @@ it to work over `cybersecurity_kb.md`:
 Each offline step also shows its **production equivalent** (a managed vector DB like Milvus, a
 hosted LLM) in comments, so the same code scales beyond the classroom.
 
-## Project — Cybersecurity Framework RAG
+## Project 1 — Cybersecurity Framework Local RAG
 
-The course project tied to this module. Students build a **RAG assistant over real cybersecurity
-framework documents** and evaluate whether its answers are actually grounded in the retrieved
-evidence.
+The first course project (Module 5), building on this module. Students build a **fully local,
+offline RAG assistant over real cybersecurity framework documents** and evaluate whether its
+answers are actually grounded in the retrieved evidence — no cloud API.
 
 - **Choose a framework corpus:** MITRE ATT&CK, MITRE ATLAS, NIST AI RMF / NIST CSF, or the OWASP
   Top 10 (Web and/or LLM). Ingest the official documents.
+- **Keep it local:** embed with a local model (e.g. `all-MiniLM-L6-v2`) and a local vector store
+  so the whole pipeline runs offline.
 - **Build the pipeline:** load → chunk → embed → index → retrieve (with a relevance threshold) →
   prompt → answer, reusing the patterns from `rag_example.ipynb`.
 - **Ground and cite:** answers must quote or reference the retrieved sections, not the model's

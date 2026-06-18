@@ -35,18 +35,19 @@ runs without a key.
 
 The course is organized by module. Each module maps to a folder with its own README.
 
-| Module | Topic | Folder |
-|--------|-------|--------|
-| M1 | Introduction & AI-for-Cyber Landscape | [Introduction_to_AI/](Introduction_to_AI/) |
-| M2 | Tools & Environment | *(setup — see this README + each module's setup)* |
-| M3 | LLMs on Local & Cloud | [Host_LLMs/](Host_LLMs/) |
-| M4 | LLM & RAG Foundations | [RAG/](RAG/) |
-| M5 | LangChain | [LangChain/](LangChain/) |
-| M6 | LangGraph | *(agent loop covered in [MCP/](MCP/); dedicated material planned)* |
-| M7 | Model Context Protocol | [MCP/](MCP/) |
-| M8 | Cybersecurity Orchestration | [MCP/](MCP/) — the pentest-automation capstone |
-| M9 | Vibe Coding & Web App Vulnerability Analysis | [VideCoding/](VideCoding/) |
-| M10+ | AI-Assisted ML for Cybersecurity | [AI_Assisted_ML_for_Cybersecurity/](AI_Assisted_ML_for_Cybersecurity/) |
+| Module | Topic | Folder | Project |
+|--------|-------|--------|---------|
+| M1 | Introduction & AI-for-Cyber Landscape | [Introduction_to_AI/](Introduction_to_AI/) | — |
+| M2 | Tools & Environment | *(setup — see this README + each module's setup)* | — |
+| M3 | LLMs on Local & Cloud | [Host_LLMs/](Host_LLMs/) | — |
+| M4 | LLM & RAG Foundations | [RAG/](RAG/) | — |
+| M5 | LLM Application Frameworks: LangChain, LangGraph & MCP | [LangChain/](LangChain/) + [MCP/](MCP/) | **Project 1 — Cybersecurity Framework Local RAG** |
+| M6 | Cybersecurity Orchestration | [MCP/](MCP/) — the pentest-automation capstone | **Project 2 — Orchestrating a Pen-Test Workflow** |
+| M7 | Vibe Coding & Web App Vulnerability Analysis | [VideCoding/](VideCoding/) | **Project 3 — Detect & Harden Vibe-Coded Apps** |
+| M8 | AI-Assisted ML for Cybersecurity | [AI_Assisted_ML_for_Cybersecurity/](AI_Assisted_ML_for_Cybersecurity/) | **Project 4 — AI-Assisted Prediction Models** |
+
+*Modules 5–7 combine the former LangChain, LangGraph, and Model Context Protocol modules into one
+LLM-application-frameworks module; the rest are renumbered accordingly.*
 
 Most notebooks follow the same teaching format: each topic is three cells — a **slide** (bullets to
 project), an **instructor script** (narration to read aloud), and a **runnable code** cell with
@@ -54,92 +55,103 @@ clean output.
 
 ---
 
-## Modules & detailed topics
+## Modules & key topics
 
-The topic lists below reflect what is actually taught in the notebooks and slides in each folder.
+Key knowledge points per module. Full detail lives in each folder's own README.
 
 ### M1 — Introduction & AI-for-Cyber Landscape  ·  [Introduction_to_AI/](Introduction_to_AI/)
-A motivating first contact with cloud LLMs on a real security task: classifying a suspicious-login
-alert with **Claude and OpenAI side-by-side**.
-- The AI-for-cyber landscape; ML vs. LLMs vs. RAG vs. agentic AI as tool categories
-- Dual-use concerns, responsible-use expectations, NIST AI RMF / MITRE ATLAS orientation
-- A first cloud LLM call: benign-vs-suspicious alert triage (`SimpleAlertClassifier.ipynb`)
-- Safe credential handling via a repository-root `.env`
+- AI-for-cyber landscape; ML vs. LLMs vs. RAG vs. agentic AI
+- Dual-use concerns, responsible use; NIST AI RMF / MITRE ATLAS
+- First cloud LLM call: benign-vs-suspicious alert triage (Claude + OpenAI)
+- Safe credential handling via `.env`
+
+### M2 — Tools & Environment  ·  *(setup)*
+- VS Code, Jupyter, Colab, Git/GitHub, Docker, Kali Linux
+- Local LLM tooling (LM Studio / Ollama)
+- Python for security data
+- Secret handling & repository hygiene
 
 ### M3 — LLMs on Local & Cloud  ·  [Host_LLMs/](Host_LLMs/)
-Running an open-source LLM **locally on a GPU** and comparing it to the cloud.
-- Cloud vs. local vs. Colab-based model experimentation
-- Loading open-source models with Hugging Face `transformers`
-- GPU inference and generation settings (`max_new_tokens`)
+- Cloud vs. local vs. Colab models
+- Hugging Face `transformers`; GPU inference (`max_new_tokens`)
+- Tokens, context windows, embeddings, inference settings
 - Capability, privacy, latency, and cost trade-offs
 
 ### M4 — LLM & RAG Foundations  ·  [RAG/](RAG/)
-How embeddings turn text into meaning, and how to assemble a full retrieval-augmented generation
-pipeline. Concepts notebook (`embedding.ipynb`) + worked example (`rag_example.ipynb`).
-- What an embedding is; classical vectorization, TF-IDF, embeddings vs. hashing
-- Static vs. contextual embeddings; measuring similarity; fixed dimensions
-- Choosing an embedding model; vector-space intuition
-- Chunking documents and overlapping chunks
-- Building a searchable index; top-k retrieval; vector databases & ANN
-- Re-ranking and why two stages; the full RAG pipeline
-- Real-world use cases and common mistakes
-- Worked example: load → connect store → ingest → retrieve → build chain → ask → **RAG vs. pure LLM**
+- Embeddings; classical vectorization, TF-IDF, embeddings vs. hashing
+- Static vs. contextual embeddings; similarity; fixed dimensions
+- Chunking and overlapping chunks
+- Searchable index; top-k retrieval; vector databases & ANN
+- Re-ranking; the full RAG pipeline; common mistakes
 
-### M5 — LangChain  ·  [LangChain/](LangChain/)
-Composing LLM applications from reusable components, then rebuilding RAG "the LangChain way."
-- What LangChain is; the **Runnable** interface (`invoke` / `batch` / `stream`)
-- Models: LLMs vs. chat models; prompt templates; output parsers
-- **LCEL** and the `|` pipe; your first chain
-- Chain vs. raw API calls — why a chain helps
-- Worked example: a 7-step LangChain RAG pipeline over a cybersecurity KB
+### M5 — LLM Application Frameworks: LangChain, LangGraph & MCP  ·  [LangChain/](LangChain/) + [MCP/](MCP/)
+*Combines the former LangChain, LangGraph, and Model Context Protocol modules.*
+- LangChain **Runnable** interface (`invoke` / `batch` / `stream`)
+- Prompt templates, chat models, output parsers; **LCEL** and the `|` pipe
+- Chains vs. raw API calls; RAG "the LangChain way"
+- LangGraph: stateful graphs, nodes/edges, conditional routing, human-in-the-loop
+- Agents: the **reason → act → observe** loop
+- MCP: the M×N problem; host/client/server; tools, resources, prompts
+- JSON-RPC; transports (stdio vs. HTTP); **FastMCP** server
+- LangChain/LangGraph managing MCP; security of giving an LLM tools
 
-### M7 — Model Context Protocol  ·  [MCP/](MCP/)
-A standardized way for AI clients to call external tools, with a real, runnable MCP server.
-- Why MCP? The M×N integration problem; what MCP is
-- Architecture: host, client, server; primitives (tools, resources, prompts)
-- The protocol on the wire (JSON-RPC); transports (stdio vs. HTTP)
-- Building a server with **FastMCP**; connecting a client to the real server
-- AI agents: the **reason → act → observe** loop; agents + MCP as a standard toolbox
-- LangChain/LangGraph managing MCP; chain vs. agent vs. agent+MCP
-- Security: the risks of giving an LLM tools
+### M6 — Cybersecurity Orchestration  ·  [MCP/](MCP/)
+- One pen-test assistant built three ways: chains → RAG → agent + MCP
+- Chains: `nmap → parse → analyze → report`
+- RAG: retrieve real CVEs (cite CVE IDs)
+- Agent + MCP: the agent decides which tools to call
+- Scope enforcement, simulated tools, human oversight
 
-### M8 — Cybersecurity Orchestration  ·  [MCP/](MCP/) (capstone notebook)
-`cybersecurity_automation.ipynb` builds one pentest assistant **three times** so students feel each
-limitation and its fix:
-- **Stage 1 — Chains:** `nmap → parse → analyze → report` (the LLM guesses from memory)
-- **Stage 2 — RAG:** retrieve real CVEs before analyzing (answers now cite real CVE IDs)
-- **Stage 3 — Agent + MCP:** the agent *decides* which tools to call, via the MCP server
-- Scope enforcement, simulated tools, and human-oversight themes throughout
+### M7 — Vibe Coding & Web App Vulnerability Analysis  ·  [VideCoding/](VideCoding/)
+- LLM-assisted app generation & code review
+- Hardcoded secrets, weak auth, input validation, debug exposure
+- OWASP Web Top 10 & OWASP LLM Top 10
+- Manual vs. AI-assisted review; planted-vuln / `CANARY_` exercise
 
-### M9 — Vibe Coding & Web App Vulnerability Analysis  ·  [VideCoding/](VideCoding/)
-AI-assisted app building and LLM-assisted code review, in a classroom-only scope.
-- LLM-assisted application generation and code review
-- Hardcoded secrets, weak authentication, input validation, debug exposure
-- Introductory OWASP Web Top 10 and OWASP LLM Top 10 concepts
-- Manual review vs. AI-assisted review; the planted-vulnerability / `CANARY_` secret exercise
-
-### M10+ — AI-Assisted ML for Cybersecurity  ·  [AI_Assisted_ML_for_Cybersecurity/](AI_Assisted_ML_for_Cybersecurity/)
-Traditional ML on cybersecurity datasets, consolidated into one module (foundations → applied →
-advanced → deep learning → capstone). See the [module README](AI_Assisted_ML_for_Cybersecurity/)
-for the full subtopic breakdown.
+### M8 — AI-Assisted ML for Cybersecurity  ·  [AI_Assisted_ML_for_Cybersecurity/](AI_Assisted_ML_for_Cybersecurity/)
+- Foundations: clean, feature-engineer, split, data leakage
+- Applied detection: confusion matrix, precision/recall/F1, ROC-AUC, thresholds
+- Advanced analytics: random forest, gradient boosting, imbalance, clustering, anomaly detection
+- Deep learning: PyTorch MLP, training loop, baseline benchmark, overfitting
 
 ---
 
 ## Projects
 
-The course is project-centered. Projects are listed here in course-timeline order.
+The course is project-centered. Each project follows the module that prepares it.
 
-1. **Cybersecurity Framework RAG** — build a RAG assistant over real framework documents (MITRE
-   ATT&CK / ATLAS, NIST, OWASP) and evaluate whether answers are grounded in retrieved evidence.
-   *(See [RAG/](RAG/).)*
-2. **Automated SOC** — design an AI-supported SOC workflow with intake, triage, enrichment,
-   recommendations, and a human approval gate.
-3. **Vibe Coding Security** — generate a simple web app with planted vulnerabilities and a hidden
-   secret, then analyze approved classmates' repositories with LLM-assisted and manual review.
-   *(See [VideCoding/](VideCoding/).)*
-4. **AI-Assisted ML Capstone** — an end-to-end ML project on an up-to-date cybersecurity dataset
-   from [kaggle.com](https://www.kaggle.com/datasets), aiming for high-ranking results with AI
-   assistance. *(Tied to [AI_Assisted_ML_for_Cybersecurity/](AI_Assisted_ML_for_Cybersecurity/).)*
+### Project 1 — Cybersecurity Framework Local RAG  *(with M5)*
+Build a **fully local, offline** RAG assistant over real cybersecurity framework documents — MITRE
+ATT&CK / ATLAS, NIST AI RMF / CSF, or the OWASP Top 10. Ingest and chunk the corpus, embed it with
+a local model, and answer questions grounded in retrieved passages with citations — no cloud API.
+Using the LangChain + RAG patterns from M4–M5, compare grounded `[RAG]` answers against the model's
+own knowledge, test queries with strong and with missing evidence, and report retrieval quality,
+failure modes, and limitations. *(See [RAG/](RAG/) and [LangChain/](LangChain/).)*
+
+### Project 2 — Orchestrating a Penetration-Test Workflow  *(after M6)*
+Compose an agent-driven workflow that orchestrates approved penetration-testing tools through MCP
+and LangGraph against an isolated, **authorized** lab VM. The agent reasons about which tool to call
+(recon → service enumeration → CVE lookup → report), observes results, and chooses the next step —
+with scope allowlists, logging, fail-closed behavior, and a human approval gate. Extend the MCP
+server with an additional tool, map automation choices to MITRE ATLAS / NIST AI RMF, and produce a
+grounded risk report. *(Builds on [MCP/](MCP/).)*
+
+### Project 3 — Detecting & Hardening Vibe-Coded Applications  *(after M7)*
+Starting from an AI-generated ("vibe-coded") web app, hunt for the vulnerabilities rapid generation
+tends to introduce — hardcoded secrets, weak authentication, missing input validation, debug
+exposure, injection — using both LLM-assisted and manual review of approved class repositories. Then
+**harden** the app: patch each finding, remove leaked `CANARY_` secrets, add validation and safe
+defaults, and document before/after evidence. Findings map to the OWASP Web and LLM Top 10.
+*(See [VideCoding/](VideCoding/).)*
+
+### Project 4 — AI-Assisted Prediction Models for Cybersecurity Datasets  *(after M8)*
+An end-to-end ML project on an up-to-date cybersecurity dataset from
+[kaggle.com](https://www.kaggle.com/datasets) (or an approved source such as NSL-KDD, CIC-IDS2017,
+or Loghub). Run the full workflow from the AI-Assisted ML module — data preparation and leakage
+checks, baseline and ensemble models, imbalance handling, evaluation with SOC-relevant metrics, and
+an optional deep-learning comparison — using AI tools as assistants to push for high-ranking results.
+Deliver a reproducible notebook, a technical report, and an AI-use statement.
+*(Tied to [AI_Assisted_ML_for_Cybersecurity/](AI_Assisted_ML_for_Cybersecurity/).)*
 
 > Grading weights and rubrics are maintained in the official syllabus and on Canvas.
 
