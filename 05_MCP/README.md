@@ -3,7 +3,7 @@
 A graduate lecture module for the *AI for Cybersecurity* course. It teaches the **Model Context
 Protocol (MCP)** and **AI agents**, then ties the whole course together by automating a
 penetration test that evolves through **chains → RAG → agents + MCP**. It builds on the
-[LangChain](../LangChain/) and [RAG](../RAG/) modules.
+[LangChain](../04_LangChain/) and [RAG](../03_RAG/) modules.
 
 The module is two Jupyter notebooks plus a real, runnable MCP server:
 

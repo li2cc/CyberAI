@@ -3,7 +3,7 @@
 A ~40-minute graduate lecture module for the *AI for Cybersecurity* course. It teaches the core
 LangChain building blocks — prompts, models, output parsers, and runnables — and how to compose
 them into chains, then rebuilds a RAG system the LangChain way. It is the natural follow-on to the
-[RAG](../RAG/) module.
+[RAG](../03_RAG/) module.
 
 The module is two Jupyter notebooks:
 

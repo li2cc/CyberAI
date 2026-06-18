@@ -22,7 +22,7 @@ OPENAI_API_KEY=sk-your-openai-key-here
 ### 3. Run the Script
 
 ```bash
-python Introduction_to_AI/alert_classifier.py
+python 01_Introduction_to_AI/alert_classifier.py
 ```
 
 ## Files

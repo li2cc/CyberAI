@@ -5,7 +5,7 @@ and Cloud**. It shows how to run an open-source large language model **locally o
 of calling a cloud API), using the same security task as the intro module — classifying a
 suspicious-login alert — so students can compare local vs. cloud trade-offs directly.
 
-The module contrasts with [Introduction_to_AI](../Introduction_to_AI/), which sends the same alert
+The module contrasts with [Introduction_to_AI](../01_Introduction_to_AI/), which sends the same alert
 to **cloud** models (OpenAI and Claude). Here the model runs on your own hardware.
 
 ## Contents
