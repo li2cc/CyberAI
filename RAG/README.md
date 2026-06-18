@@ -79,3 +79,25 @@ it to work over `cybersecurity_kb.md`:
 
 Each offline step also shows its **production equivalent** (a managed vector DB like Milvus, a
 hosted LLM) in comments, so the same code scales beyond the classroom.
+
+## Project — Cybersecurity Framework RAG
+
+The course project tied to this module. Students build a **RAG assistant over real cybersecurity
+framework documents** and evaluate whether its answers are actually grounded in the retrieved
+evidence.
+
+- **Choose a framework corpus:** MITRE ATT&CK, MITRE ATLAS, NIST AI RMF / NIST CSF, or the OWASP
+  Top 10 (Web and/or LLM). Ingest the official documents.
+- **Build the pipeline:** load → chunk → embed → index → retrieve (with a relevance threshold) →
+  prompt → answer, reusing the patterns from `rag_example.ipynb`.
+- **Ground and cite:** answers must quote or reference the retrieved sections, not the model's
+  memory. Tag responses `[RAG]` vs. `[LLM]` and surface the supporting passages.
+- **Evaluate retrieval quality:** test queries with strong evidence and queries with *no* good
+  evidence; show how the system behaves (correct grounding vs. graceful "not found" vs.
+  hallucination) and discuss the failure modes.
+- **Deliverables:** a reproducible notebook, a short report on retrieval quality and limitations,
+  and a brief AI-use statement.
+
+> **Scope:** use only approved, public framework documents. Frame the assistant as a defensive
+> analysis aid, and keep any API keys in the repository-root `.env`.
+
