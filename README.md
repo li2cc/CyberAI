@@ -43,7 +43,7 @@ The course is organized by module. Each module maps to a folder with its own REA
 | M4 | LLM & RAG Foundations | [03_RAG/](03_RAG/) | — |
 | M5 | LLM Application Frameworks: LangChain, LangGraph & MCP | [04_LangChain/](04_LangChain/) + [05_MCP/](05_MCP/) | **Project 1 — Cybersecurity Framework Local RAG** |
 | M6 | Cybersecurity Orchestration | [05_MCP/](05_MCP/) — the pentest-automation capstone | **Project 2 — Orchestrating a Pen-Test Workflow** |
-| M7 | Vibe Coding & Web App Vulnerability Analysis | [06_VideCoding/](06_VideCoding/) | **Project 3 — Detect & Harden Vibe-Coded Apps** |
+| M7 | Vibe Coding & Web App Vulnerability Analysis | [06_VibeCoding/](06_VibeCoding/) | **Project 3 — Detect & Harden Vibe-Coded Apps** |
 | M8 | AI-Assisted ML for Cybersecurity | [07_AI_Assisted_ML_for_Cybersecurity/](07_AI_Assisted_ML_for_Cybersecurity/) | **Project 4 — AI-Assisted Prediction Models** |
 
 *Modules 5–7 combine the former LangChain, LangGraph, and Model Context Protocol modules into one
@@ -102,7 +102,7 @@ Key knowledge points per module. Full detail lives in each folder's own README.
 - Agent + MCP: the agent decides which tools to call
 - Scope enforcement, simulated tools, human oversight
 
-### M7 — Vibe Coding & Web App Vulnerability Analysis  ·  [06_VideCoding/](06_VideCoding/)
+### M7 — Vibe Coding & Web App Vulnerability Analysis  ·  [06_VibeCoding/](06_VibeCoding/)
 - LLM-assisted app generation & code review
 - Hardcoded secrets, weak auth, input validation, debug exposure
 - OWASP Web Top 10 & OWASP LLM Top 10
@@ -142,7 +142,7 @@ tends to introduce — hardcoded secrets, weak authentication, missing input val
 exposure, injection — using both LLM-assisted and manual review of approved class repositories. Then
 **harden** the app: patch each finding, remove leaked `CANARY_` secrets, add validation and safe
 defaults, and document before/after evidence. Findings map to the OWASP Web and LLM Top 10.
-*(See [06_VideCoding/](06_VideCoding/).)*
+*(See [06_VibeCoding/](06_VibeCoding/).)*
 
 ### Project 4 — AI-Assisted Prediction Models for Cybersecurity Datasets  *(after M8)*
 An end-to-end ML project on an up-to-date cybersecurity dataset from
