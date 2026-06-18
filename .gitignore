@@ -30,8 +30,12 @@ MANIFEST
 
 # Virtual environments
 venv/
+.venv/
 ENV/
 env/
+
+# Runtime logs
+*.log
 
 # IDE
 .vscode/
