@@ -37,6 +37,14 @@ env/
 # Runtime logs
 *.log
 
+# Local-only course materials (never pushed)
+assignments and projects/
+
+# Personal / local artifacts (not course materials)
+Nairr_application.*
+ChengchengLi.pptx
+_build_showcase_slides.py
+
 # IDE
 .vscode/
 .idea/
