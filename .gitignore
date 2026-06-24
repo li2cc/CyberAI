@@ -43,7 +43,12 @@ assignments and projects/
 # Personal / local artifacts (not course materials)
 Nairr_application.*
 ChengchengLi.pptx
-_build_showcase_slides.py
+
+# Notebook generator scripts (internal tooling — not distributed)
+_build_*.py
+
+# Textbooks / copyrighted source material (not distributed)
+Textbooks/
 
 # IDE
 .vscode/
